@@ -1,0 +1,8 @@
+RESOURCE directory test_folder LOCATED AT "./tests"
+RESOURCE server_process test_runner IDENTIFIED BY "echo '[D++ TEST EXECUTION RUNNING...]'"
+
+SET evaluation_interval = 1 second
+
+WHEN test_folder.modified_count IS GREATER THAN 3 FOR 5 seconds
+TRIGGER test_runner ON
+UNTIL test_runner.status IS EQUAL TO "SUCCESS"
