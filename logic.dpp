@@ -1,0 +1,11 @@
+// logic.dpp
+RESOURCE hardware water_valve IDENTIFIED BY 0x01
+RESOURCE hardware mist_fan     IDENTIFIED BY 0x02
+
+SET evaluation_interval = 1 second
+SET max_daily_allowance = 60 minutes
+
+WHEN temperature IS GREATER THAN 35 FOR 3 seconds
+TRIGGER mist_fan ON
+UNTIL temperature IS LESS THAN OR EQUAL TO 30
+SKIP IF forecast.rain IS TRUE
